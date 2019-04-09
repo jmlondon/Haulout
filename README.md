@@ -9,8 +9,9 @@ buckshot: Research compendium in support of the manuscript “Haul-out behavior 
 
 ### Compendium DOI:
 
-This compendium will (soon) be published to Zenodo. At that time, the
-DOI will be provided here
+This is published to Zenodo.
+
+[![DOI](https://zenodo.org/badge/134605799.svg)](https://zenodo.org/badge/latestdoi/134605799)
 
 The files hosted at github.com/jmlondon/buckshot are the development
 versions and are likely to change
