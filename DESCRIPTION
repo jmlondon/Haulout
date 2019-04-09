@@ -1,5 +1,5 @@
-Package: bshobehav
-Title: Haul-out behavior and detectability of bearded, ribbon, and spotted seals in the Bering and Chukchi Seas
+Package: buckshot
+Title: Bering and Chukchi Seas Seal Haul-out Behavior
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Josh",

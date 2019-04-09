@@ -1,18 +1,18 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Last-changedate](https://img.shields.io/badge/last%20change-2019--04--09-green.svg)](https://github.com/jmlondon/bshobehav/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2019--04--09-green.svg)](https://github.com/jmlondon/buckshot/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.3-green.svg)](https://cran.r-project.org/)
 [![ORCiD](https://img.shields.io/badge/ORCiD-0000--0002--3647--5046-green.svg)](http://orcid.org/0000-0002-3647-5046)
 
-Research compendium in support of the manuscript “Haul-out behavior and detectability of bearded, ribbon, and spotted seals in the Bering and Chukchi Seas”
------------------------------------------------------------------------------------------------------------------------------------------------------------
+buckshot: Research compendium in support of the manuscript “Haul-out behavior and detectability of bearded, ribbon, and spotted seals in the Bering and Chukchi Seas”
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Compendium DOI:
 
 This compendium will (soon) be published to Zenodo. At that time, the
 DOI will be provided here
 
-The files hosted at github.com/jmlondon/bshobehav are the development
+The files hosted at github.com/jmlondon/buckshot are the development
 versions and are likely to change
 
 ### Authors of this repository:
