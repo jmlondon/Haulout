@@ -1,0 +1,13 @@
+Package: bshobehav
+Title: Haul-out behavior and detectability of bearded, ribbon, and spotted seals in the Bering and Chukchi Seas
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Josh",
+           family = "London",
+           role = c("aut", "cre"),
+           email = "josh.london@noaa.gov",
+           comment = c(ORCID = "0000-0002-3647-5046"))
+Description: a research compendium in support of the manuscript
+License: CC0
+Encoding: UTF-8
+LazyData: true
