@@ -1,7 +1,7 @@
 Package: buckshot
 Title: Bering and Chukchi Seas Seal Haul-out Behavior
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person(given = "Josh",
            family = "London",
            role = c("aut", "cre"),
@@ -11,3 +11,4 @@ Description: a research compendium in support of the manuscript
 License: CC0
 Encoding: UTF-8
 LazyData: true
+Imports: bookdown
