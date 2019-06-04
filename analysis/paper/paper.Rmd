@@ -11,34 +11,37 @@ author:
   - Peter L. Boveng
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
-    bookdown::html_document2:
-      fig_caption: yes
-      reference_docx: "../templates/template.docx" # Insert path for the DOCX file
+    redoc::redoc
 bibliography: references.bib
-csl: "../templates/journal-of-archaeological-science.csl" # Insert path for the bib-style
 abstract: |
   Ice-associated seals rely on sea ice for a variety of activities, including breeding, molting, pupping, and rest.  In the Arctic, many of these activities occur in spring and early summer (April-June) as sea ice begins to melt and retreat northward.  Rapid acceleration of climate change in Arctic ecosystems is thus of concern, as the quantity and quality of suitable habitat is forecast to decrease.  In this paper, we use data collected from satellite-linked telemetry tags deployed between 2005 and 2017 to investigate the seasonal timing and environmental factors affecting sea ice use by phocid seals (specifically, bearded, ribbon, and spotted seals) in the Bering, Chukchi, and Beaufort Seas. In addition to providing baseline data on phenology, these data also allow us to refine availability estimates needed to accurately estimate abundance from aerial survey counts of seals basking on ice (i.e., to correct for the proportion of animals that are in the water while surveys are conducted).  Using generalized linear mixed pseudo-models to properly account for temporal autocorrelation, we fit models with a variety of covariates (e.g., day-of-year, solar hour, age-sex class, wind speed, barometric pressure, temperature, precipitation) to examine their ability to explain variation in hourly haul-out records.  We found evidence for strong diurnal and seasonal patterns in haul-out behavior, as well as strong weather effects (particularly wind and temperature).  In general, seals were more likely to bask on ice in the middle of the day and when wind speed was low and temperatures were higher.  Haul-out propensity increased through March and April, peaking in May and early June before declining again. The timing and frequency of haul-out events also varied substantially based on species and age-sex class.  For ribbon and spotted seals, models with year effects were highly supported, indicating that the timing and magnitude of haul-out behavior varied among years.  This analysis suggested a large degree of plasticity in the timing of annual haul-out peaks, suggesting that they may have ability to adapt breeding, molting, and pupping to environmental conditions.  Our analysis also emphasizes the importance of accounting for factors affecting haul-out behavior when interpreting the number of seals counted in aerial surveys. 
 keywords: |
   availability; generalized linear mixed pseudo-model; haul-out behavior; phenology; Phocidae; sea ice
-highlights: |
-  These are the highlights. 
 ---
 
 
-<!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
-
-```{r, setup, echo = FALSE}
+```{r, setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   warning = FALSE,
   message = FALSE,
   echo = FALSE,
+  include = FALSE,
   comment = "#>",
   fig.path = "../figures/"
 )
-
-# library(buckshot) # Or use devtools::load_all('.', quiet = T) if your code is in script files, rather than as functions in the `/R` diretory
 ```
+
+```{r, libraries}
+library(tidyverse)
+library(redoc)
+library(citr)
+
+# library(buckshot) 
+# Or use devtools::load_all('.', quiet = T)
+```
+
+
 
 # Introduction
 
@@ -77,7 +80,7 @@ Quantitative studies on the phenology of pinniped sea ice use have been
 conducted, but there are large knowledge gaps, especially relative to
 ice-associated pinnipeds. Several authors have used logistic regression-style
 analyses to estimate the probability of sea ice use from data garnered from
-satellite-linked time-depth recorders (TDRs). In these models, haul-out
+bio-loggers. In these models, haul-out
 probabilities can be expressed as a function of predictive covariates, such as
 time-of-day, day-of-year, sex, age class, and environmental conditions (e.g.,
 Reder et al. 2003, Bengtson and Cameron 2004, Bengtson et al. 2005, Udevitz et
@@ -87,22 +90,23 @@ and/or seasonal variation in haul-out probabilities. For instance, Bengtson and
 Cameron’s (2004) study included 5 adult and 2 juvenile crabeater seals, while
 Bengtson et al.’s (2005) study was based on 6 telemetered ringed seals (Phoca
 hispida) in the Chukchi Sea. These studies are often further limited by
-logistical constraints on tagging fieldwork and the operational life of
+logistical constraints on tagging fieldwork and the attachement duration
+or operational life of
 satellite tags. For ringed seals, tagging can often only occur after seals
 emerge from snow dens in the spring (Bengtson and Cameron 2004). The use of head
-mounted satellite tags provide some benefits over flipper mounted tags (such as
-increased satellite transmittal rates), but these typically are lost during
+mounted satellite tags provide some benefits over flipper mounted tags (e.g.
+increased satellite transmittal rates), but these are lost during the annual
 molt, limiting the effective length of haul-out timelines.
 
 Despite these limitations, analyses of satellite telemetry records have proven
 valuable for identifying covariates that explain variation in sea ice use by
 ice-associated seals. For instance, in the Antarctic, Bengtson and Cameron
 (2004) documented greater haulout propensity in tagged juvenile crabeater
-(Lobodon carcinophaga) seals than adults, with highest probabilities in February
+(*Lobodon carcinophaga*) seals than adults, with highest probabilities in February
 and at times close to solar noon. In the Arctic, Bengtson et al. (2005)
 documented a higher propensity for sea ice use near solar noon, as did Ver Hoef
-et al. (2014) in an analysis of bearded (Erignathus barbatus), ribbon
-(Histriophoca fasciata), and spotted (Phoca largha) seals using much greater
+et al. (2014) in an analysis of bearded (*Erignathus barbatus*), ribbon
+(*Histriophoca fasciata*), and spotted (*Phoca largha*) seals using much greater
 sample sizes. Ver Hoef et al. (2014) also showed that haul-out probabilities
 increased gradually starting in March, peaking in May and June for bearded,
 ribbon, and spotted seals. However, their primary focus was estimating seal
@@ -113,7 +117,7 @@ insignificant at p = 0.05; Ver Hoef et al. 2014). Maximal haul-out probabilities
 in these studies were near 0.65 for ringed seals (Bengtson et al. 2005),
 and 0.66, 0.62, and 0.54 for bearded, ribbon, and spotted seals, respectively.
 
-In this study, we use available ARGOS-linked satellite tagging records in a
+In this study, we use available ARGOS-linked bio-logger records in a
 comprehensive investigation of sea ice use by ice-associated seals tagged in the
 Bering and Chukchi Seas. Our goals are twofold. First, we wish to establish
 baseline estimates of the chronology of sea ice use among different age- and
@@ -130,7 +134,7 @@ considerably from the population. We thus seek to extend the scope of previous
 haul-out analyses, investigating the influence of meteorological variability and
 possible ramifications of nonrepresentative age-sex samples.
 
-This article is structured as follows. First, we describe satellite telemetry
+This article is structured as follows. First, we describe the bio-logging
 data, including technical specifications of tags and information on tag
 deployment. Second, we describe the modeling framework used to analyze telemetry
 records, including details on explanatory covariates used to explain variation
